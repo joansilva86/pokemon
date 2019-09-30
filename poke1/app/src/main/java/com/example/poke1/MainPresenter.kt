@@ -27,13 +27,14 @@ class MainPresenter(private var view: MainView?) {
 
         vo = VolleyS.getInstance(context)
         ser.getPokemones(vo!!, listenerOk, listenerError)
-        //ser.getPokemon(vo, listenerOk, listenerError,1)
+
 
     }
 
     var listenerOk = object : ListenerPokeServiceOk {
         override fun retorno(list: ArrayList<Pokemon>) {
-            ser.getImagenesPokemones(vo!!, listenerImagenesPokemon, listenerErrorImagenes)
+            ser.getBitMap()
+            //view?.showList(list)
         }
     }
 

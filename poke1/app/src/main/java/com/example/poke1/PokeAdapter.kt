@@ -29,7 +29,7 @@ class PokeAdapter : RecyclerView.Adapter<PokeAdapter.PokeViewHolder>() {
     class PokeViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         fun bind(poke: Pokemon) {
             view.txtNombre.text = poke.namePoke
-            view.txtImagenUrl.text = poke.image
+            view.txtImagenUrl.text = poke.imageUrl
             view.imageView.setImageBitmap(poke.imagenBitmap)
         }
     }

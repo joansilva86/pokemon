@@ -35,7 +35,7 @@ class PokeService(private var view: MainView) {
         cont = 0
         for (i in 0 until list.size) {
             var imageRequest = ImageRequest(
-                list[i].image,
+                list[i].imageUrl,
                 Response.Listener<Bitmap> {
                     list[i].imagenBitmap = it
                     cont++
@@ -53,26 +53,12 @@ class PokeService(private var view: MainView) {
         }
     }
 
-    fun getImagenesPokemones(
-        voley: VolleyS,
-        listener: ListenerImagenesPokemon,
-        listenerError: ListenerErrorImagenes
-        //,list: ArrayList<Pokemon>
-    ) {
-        for (i in 0 until list.size) {
-            var url = list[i].url
-            getPokemonImagen(voley, listenerPokemonImagenOk, listenerPokemonImagenError, i)
-        }
-        //listener.retorno(list)
-
-    }
-
     fun getPokemones(
         voley: VolleyS,
         listener: ListenerPokeServiceOk,
         listenerError: ListenerPokeServiceError
     ) {
-        var url = "https://pokeapi.co/api/v2/pokemon/?offset=10&limit=10"
+        var url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10"
         list.clear()
         vo = voley
 
@@ -81,11 +67,9 @@ class PokeService(private var view: MainView) {
             for (i in 0 until jsonArray.length()) {
                 var protoPoke = jsonArray.getJSONObject(i)
 
-                var anyPoke = Pokemon()
+                var anyPoke = Pokemon(id=i+1)
                 anyPoke.fillWith(protoPoke)
                 list.add(anyPoke)
-
-
             }
             listener.retorno(list)
         }, Response.ErrorListener { error ->
@@ -99,28 +83,6 @@ class PokeService(private var view: MainView) {
         //voley.queue.add(requestArray)
     }
 
-    fun getPokemonImagen(
-        voley: VolleyS,
-        listener: ListenerPokemonImagenOk,
-        listenerError: ListenerPokemonImagenError,
-        index: Int
-    ) {
-        var url = "https://pokeapi.co/api/v2/pokemon/${index + 1}"
-        var imag = ""
-        var requestObject = JsonObjectRequest(url, null, Response.Listener { response ->
-            var jsonObject = response.getJSONObject("sprites")
-            if (jsonObject.has("front_default"))
-                imag = jsonObject.getString("front_default")
-            list[index].image = imag
-            listener.retorno()
-
-        }
-            , Response.ErrorListener { error ->
-                var un = error
-                listenerError.retorno()
-            })
-        voley.queue.add(requestObject)
-    }
 }
 
 interface ListenerPokemonImagenOk {
