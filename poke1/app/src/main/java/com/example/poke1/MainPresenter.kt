@@ -1,15 +1,15 @@
 package com.example.poke1
 
 import android.content.Context
+import com.example.poke1.Service.*
 
 class MainPresenter(private var view: MainView?) {
-    private var ser : PokeService
+    private var ser : PokeService =
+        PokeService(view!!)
     private var vo: VolleyS? = null
     private var lista =  ArrayList<Pokemon>()
 
-    init {
-        ser = PokeService(view!!)
-    }
+
 
     fun refresh() {
         view?.showList(lista)
@@ -28,13 +28,15 @@ class MainPresenter(private var view: MainView?) {
         vo = VolleyS.getInstance(context)
         ser.getPokemones(vo!!, listenerOk, listenerError)
 
+        //ser.getPokemones(vo!!, listenerOk, ListenerPokeServiceError {})
+
 
     }
 
     var listenerOk = object : ListenerPokeServiceOk {
         override fun retorno(list: ArrayList<Pokemon>) {
-            ser.getBitMap()
-            //view?.showList(list)
+            //ser.getBitMap()
+            view?.showList(list)
         }
     }
 
@@ -49,6 +51,7 @@ class MainPresenter(private var view: MainView?) {
 
         }
     }
+
     var listenerImagenesPokemon = object : ListenerImagenesPokemon {
         override fun retorno(list: ArrayList<Pokemon>) {
             lista = list
