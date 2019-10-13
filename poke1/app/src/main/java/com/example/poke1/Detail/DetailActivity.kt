@@ -1,7 +1,8 @@
-package com.example.poke1
+package com.example.poke1.Detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.poke1.R
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity(), DetailView {

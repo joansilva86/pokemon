@@ -1,10 +1,11 @@
-package com.example.poke1
+package com.example.poke1.Presente.Main
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.toolbox.ImageLoader
+import com.example.poke1.R
 import kotlinx.android.synthetic.main.templatepoke.view.*
 
 class PokeAdapter(var imageLoader: ImageLoader, var listener: ListenerRecyclerClick) :
