@@ -1,8 +1,13 @@
 package com.example.poke1.Presente.NewAccount
 
 interface NewAccountView  {
-    fun showErrorCreate()
-    fun showErrorPassword()
-    fun showErrorEmail()
-    fun showNewUserOk()
+
+    fun mailEmpty()
+    fun passEmpty()
+    fun pass2Empty()
+    fun nameEmpty()
+    fun lastNameEmpty()
+    fun showDiferentPass()
+    fun showUserOk()
+    fun showUserFail()
 }

@@ -1,4 +1,4 @@
-package com.example.poke1.Detail
+package com.example.poke1.Presente.Detail
 
 import android.graphics.Bitmap
 import org.json.JSONObject

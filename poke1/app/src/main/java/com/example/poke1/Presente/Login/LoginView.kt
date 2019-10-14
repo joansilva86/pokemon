@@ -7,4 +7,5 @@ interface LoginView {
     fun userOk()
     fun userEmpty()
     fun passEmpty()
+    fun pass2Empty()
 }

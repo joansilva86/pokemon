@@ -3,8 +3,11 @@ package com.example.poke1.Presente.Login
 import android.content.Intent
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import com.example.poke1.Presente.Base.BaseActivity
+import com.example.poke1.Presente.ForgetPass.ForgetPassActivity
 import com.example.poke1.Presente.Main.MainActivity
 import com.example.poke1.Presente.NewAccount.NewAccountActivity
 
@@ -16,23 +19,61 @@ class LoginActivity : BaseActivity(), LoginView {
 
     var presenter = LoginPresenter()
 
+    /***************/
+//BUScar una forma de escribir esto con expreciones lambda
+    /***************/
+    private val onCleanError = object : TextWatcher {
+
+        override fun afterTextChanged(s: Editable) {}
+
+        override fun beforeTextChanged(
+            s: CharSequence, start: Int,
+            count: Int, after: Int
+        ) {
+        }
+
+        override fun onTextChanged(
+            s: CharSequence, start: Int,
+            before: Int, count: Int
+        ) {
+
+            if (s.isEmpty()) {
+            } else {
+                txtLayoutPass.error = null
+                txtLayoutMail.error = null
+            }
+        }
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.activity_login
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        btnSignIn.setOnClickListener{
-            presenter.login(txtMail.text.toString(),txtPass.text.toString())
+        txtMail.addTextChangedListener(onCleanError)
+        txtPass.addTextChangedListener(onCleanError)
+
+        btnSignIn.setOnClickListener {
+            presenter.login(txtMail.text.toString(), txtPass.text.toString())
         }
         btnSignGoogle.setOnClickListener {
             //todo
         }
         btnNewAccount.setOnClickListener {
             val intent = Intent(this, NewAccountActivity::class.java)
-            startActivity(intent) }
+            startActivity(intent)
+        }
 
+    }
+    fun ForgetPassListener(view: View){
+        val intent = Intent(this, ForgetPassActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.attach(this)
+        presenter.attach(this, this)
     }
 
     override fun onPause() {
@@ -40,9 +81,6 @@ class LoginActivity : BaseActivity(), LoginView {
         presenter.detach()
     }
 
-    override fun getLayout(): Int {
-        return R.layout.activity_login
-    }
 
 
     override fun showDelay() {
@@ -62,6 +100,7 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun userOk() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun userEmpty() {
@@ -71,6 +110,10 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun passEmpty() {
         txtLayoutPass.error = getString(R.string.field_empty)
     }
+    override fun pass2Empty() {
+        txtLayoutPass.error = getString(R.string.field_empty)
+    }
+
 
 
 }

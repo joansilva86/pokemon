@@ -6,21 +6,26 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.poke1.*
 import com.example.poke1.Presente.Base.BaseActivity
-import com.example.poke1.Detail.DetailActivity
+import com.example.poke1.Presente.Detail.DetailActivity
 import com.example.poke1.Service.VolleyS
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), MainView {
     var presenter = MainPresenter(this)
 
-    override fun showError() {
-        Toast(R.string.errorServicio.toString())
+    override fun getLayout(): Int {
+        return R.layout.activity_main
     }
 
-    override fun showList(list: ArrayList<Pokemon>) {
-        (recycler.adapter as PokeAdapter).listPokemos = list
-    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        recycler.layoutManager = LinearLayoutManager(this)
+        var vo = VolleyS.getInstance(this)
+        recycler.adapter =
+            PokeAdapter(vo.imageLoader!!, listenerRecyclerClick)
+
+    }
 
     override fun onResume() {
         super.onResume()
@@ -41,17 +46,14 @@ class MainActivity : BaseActivity(), MainView {
 
     }
 
-    override fun getLayout(): Int {
-        return R.layout.activity_main
+
+
+
+    override fun showError() {
+        Toast(R.string.errorServicio.toString())
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        recycler.layoutManager = LinearLayoutManager(this)
-        var vo = VolleyS.getInstance(this)
-        recycler.adapter =
-            PokeAdapter(vo.imageLoader!!, listenerRecyclerClick)
-
+    override fun showList(list: ArrayList<Pokemon>) {
+        (recycler.adapter as PokeAdapter).listPokemos = list
     }
 }

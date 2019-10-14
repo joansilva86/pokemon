@@ -61,7 +61,3 @@ class MainPresenter(private var view: MainView?) {
     }
 }
 
-interface MainView {
-    fun showError()
-    fun showList(list: ArrayList<Pokemon>)
-}

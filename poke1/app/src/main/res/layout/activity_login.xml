@@ -5,12 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="10dp"
+
     android:orientation="vertical"
     tools:context=".Presente.Login.LoginActivity">
 
@@ -22,9 +17,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="30dp">
 
+            <ImageView
+                android:id="@+id/masked"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:padding="3dp"
+                android:scaleType="fitCenter"
 
+                app:srcCompat="@drawable/pik" />
             <Button
                 android:id="@+id/btnSignGoogle"
                 android:layout_width="match_parent"
@@ -99,12 +104,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="SignIn" />
+                android:textSize="15sp"
+                android:layout_gravity="center_horizontal"
+                android:text="Ingresar" />
+
+            <Button
+                android:id="@+id/btnForgetPass"
+                android:onClick="ForgetPassListener"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/forget_pass" />
+
             <Button
                 android:id="@+id/btnNewAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:textSize="10sp"
                 android:text="@string/new_account" />
         </LinearLayout>
     </ScrollView>

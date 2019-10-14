@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "555573799335",
+    "firebase_url": "https://pokeserver-504bc.firebaseio.com",
+    "project_id": "pokeserver-504bc",
+    "storage_bucket": "pokeserver-504bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555573799335:android:f8196221de0370081b6e82",
+        "android_client_info": {
+          "package_name": "com.example.poke1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555573799335-q4ah5aicbifjkvotoutkpq29rsbju7b1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.poke1",
+            "certificate_hash": "0c32592cfc8c0785b8072b64c5b82d40caf2fa9d"
+          }
+        },
+        {
+          "client_id": "555573799335-6lmqv1mokm893bt8cq38a4ch1ml9t70g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL2Vjjma53W5CFT7SBT0RyskV6iZWh1cE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555573799335-6lmqv1mokm893bt8cq38a4ch1ml9t70g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,6 +12,9 @@
     <string name="errorServicio">"Error service pokemon"</string>
     <string name="password">pasword</string>
     <string name="user">e-mail</string>
-    <string name="new_account">new account</string>
+    <string name="new_account">Crear una Cuenta</string>
     <string name="field_empty">el campo no puede estar vacio</string>
+    <string name="forget_pass">Olvido su contrasena</string>
+    <string name="name">Nombre</string>
+
 </resources>

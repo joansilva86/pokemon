@@ -10,14 +10,16 @@
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/imgPic"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
 
     <TextView
         android:id="@+id/txtNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:textSize="20sp"
         android:text="TextView" />
 
 
