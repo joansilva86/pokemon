@@ -45,7 +45,3 @@ class DetailPresenter (var context: Context){
     }
 }
 
-interface DetailView {
-    fun showError()
-    fun showPokemonDetail(pokemon: PokemonDetail)
-}
