@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_new_account.txtPass
 
 class NewAccountActivity : BaseActivity(), NewAccountView {
 
-    val presenter = NewAccountPresenter()
+    private val presenter = NewAccountPresenter()
 
 
     override fun getLayout(): Int {
@@ -89,7 +89,8 @@ class NewAccountActivity : BaseActivity(), NewAccountView {
             pass2 = txtPass2.text.toString()
 
         )
-
+        btnNewAccount.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
         presenter.createUser(model)
 
     }
@@ -114,6 +115,9 @@ class NewAccountActivity : BaseActivity(), NewAccountView {
 
     override fun showUserFail() {
         Toast("Ocurrio un error al crear el usuario")
+        btnNewAccount.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
+
     }
 
     override fun showDiferentPass() {

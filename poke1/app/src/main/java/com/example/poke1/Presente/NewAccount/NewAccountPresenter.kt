@@ -53,7 +53,7 @@ class NewAccountPresenter : BasePresenter {
         /*********************/
         auth.createUserWithEmailAndPassword(model.mail, model.pass)
             .addOnCompleteListener(activity!!) { task ->
-                if (task.isComplete) {
+                if (task.isComplete && task.isSuccessful) {
                     val user = auth.currentUser
                     val userDB = dbReference.child(user?.uid)
                     userDB.child("Name").setValue(model.name)

@@ -86,6 +86,8 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun showDelay() {
         progressBar.visibility = View.VISIBLE
         btnSignIn.visibility = View.INVISIBLE
+        btnNewAccount.visibility = View.INVISIBLE
+        btnForgetPass.visibility = View.INVISIBLE
     }
 
     override fun showCreateAcount() {
@@ -95,6 +97,11 @@ class LoginActivity : BaseActivity(), LoginView {
 
     override fun showError() {
         Toast("ocurrio un error al conectar al servidor")
+        progressBar.visibility = View.GONE
+
+        btnSignIn.visibility = View.VISIBLE
+        btnNewAccount.visibility = View.VISIBLE
+        btnForgetPass.visibility = View.VISIBLE
     }
 
     override fun userOk() {
@@ -110,9 +117,7 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun passEmpty() {
         txtLayoutPass.error = getString(R.string.field_empty)
     }
-    override fun pass2Empty() {
-        txtLayoutPass.error = getString(R.string.field_empty)
-    }
+
 
 
 

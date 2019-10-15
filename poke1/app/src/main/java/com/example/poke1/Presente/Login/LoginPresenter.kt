@@ -50,7 +50,7 @@ class LoginPresenter {
 
                 auth.signInWithEmailAndPassword(user, pass)
                     .addOnCompleteListener(activity!!) { task ->
-                        if (task.isComplete) {
+                        if (task.isComplete && task.isSuccessful) {
                             view?.userOk()
                         } else {
                             view?.showError()
