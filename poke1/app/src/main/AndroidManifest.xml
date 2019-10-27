@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Presente.splash.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".Presente.ForgetPass.ForgetPassActivity" />
         <activity android:name=".Presente.NewAccount.NewAccountActivity" />
         <activity android:name=".Presente.Login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Presente.Detail.DetailActivity" />
         <activity android:name=".Presente.Main.MainActivity" />

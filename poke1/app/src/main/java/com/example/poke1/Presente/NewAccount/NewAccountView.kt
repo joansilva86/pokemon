@@ -9,5 +9,8 @@ interface NewAccountView  {
     fun lastNameEmpty()
     fun showDiferentPass()
     fun showUserOk()
-    fun showUserFail()
+    fun showUserFail(msj:String)
+    fun showDelay(state: Boolean)
+    fun invalidFormatEmail()
+    fun sendVerificationEmail(state:Boolean)
 }

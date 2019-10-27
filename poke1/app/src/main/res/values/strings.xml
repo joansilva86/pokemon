@@ -16,5 +16,8 @@
     <string name="field_empty">el campo no puede estar vacio</string>
     <string name="forget_pass">Olvido su contrasena</string>
     <string name="name">Nombre</string>
+    <string name="invalidFormatEmail">Formato de mail incorrecto</string>
+    <string name="failSendVerificationEmail">No se pudo enviar el correo de validacion</string>
+    <string name="okSendVerificationEmail">Se envia mail de validacion</string>
 
 </resources>

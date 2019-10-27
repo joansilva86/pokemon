@@ -1,19 +1,26 @@
 package com.example.poke1.Presente.Login
 
 import android.app.Activity
+
+import android.util.Log
 import com.example.poke1.Domain.LoginInteractor
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import android.util.Patterns
+
 
 class LoginPresenter {
+
+    companion object {
+        private const val TAG = "LoginPresenter"
+    }
 
     var db = FirebaseDatabase.getInstance()
     var auth = FirebaseAuth.getInstance()
     var dbReference: DatabaseReference
 
     init {
-
         dbReference = db.reference.child("User")
     }
 
@@ -31,49 +38,42 @@ class LoginPresenter {
         activity = null
     }
 
-    fun login(user: String, pass: String) {
-        var bPass = false
-        var bMail = false
+
+    fun login(model: LoginModel) {
+        val pattern = Patterns.EMAIL_ADDRESS
+
         if (view != null) {
-            if (pass.isEmpty()) {
+            if (model.pass.isEmpty()) {
                 view?.passEmpty()
-            } else {
-                bMail = true
             }
-            if (user.isEmpty()) {
+
+            if (model.mail.isEmpty()) {
                 view?.userEmpty()
-            } else {
-                bPass = true
             }
-            if (bPass && bMail) {
-                view?.showDelay()
-
-                auth.signInWithEmailAndPassword(user, pass)
-                    .addOnCompleteListener(activity!!) { task ->
-                        if (task.isComplete && task.isSuccessful) {
-                            view?.userOk()
-                        } else {
-                            view?.showError()
-                        }
-                    }
-
-                //interactor.SignIn(user,pass,callback)
-
+            if (!pattern.matcher(model.mail).matches()) {
+                view?.invalidFormatEmail()
             }
-            return
 
+            if (!model.isValid) {
+                return
+            }
         }
-    }
+        view?.showDelay(true)
 
-    val callback = object : LoginInteractor.SignInCallBack {
-        override fun authenticationOk() {
-            view?.userOk()
-        }
+        auth.signInWithEmailAndPassword(model.mail, model.pass)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    view?.userOk()
+                } else {
+                    Log.w(TAG, " fail to signIn", task.exception)
+                    view?.showError(task.exception.toString())
+                }
+            }
+        view?.showDelay(false)
 
-        override fun authenticationError() {
-            view?.showError()
-        }
 
     }
 }
+
+
 

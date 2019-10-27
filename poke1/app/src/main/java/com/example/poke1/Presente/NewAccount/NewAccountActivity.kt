@@ -89,8 +89,7 @@ class NewAccountActivity : BaseActivity(), NewAccountView {
             pass2 = txtPass2.text.toString()
 
         )
-        btnNewAccount.visibility = View.GONE
-        progressBar.visibility = View.VISIBLE
+
         presenter.createUser(model)
 
     }
@@ -113,11 +112,8 @@ class NewAccountActivity : BaseActivity(), NewAccountView {
         finish()
     }
 
-    override fun showUserFail() {
-        Toast("Ocurrio un error al crear el usuario")
-        btnNewAccount.visibility = View.VISIBLE
-        progressBar.visibility = View.GONE
-
+    override fun showUserFail(msj: String) {
+        Toast("Ocurrio un error al crear el usuario " + msj)
     }
 
     override fun showDiferentPass() {
@@ -142,6 +138,27 @@ class NewAccountActivity : BaseActivity(), NewAccountView {
 
     override fun lastNameEmpty() {
         txtLayoutLastName.error = "El campo no puede estar vacio"
+    }
+
+    override fun showDelay(state: Boolean) {
+        if (state) {
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.GONE
+        }
+
+    }
+
+    override fun invalidFormatEmail() {
+        txtLayoutMail.error = getString(R.string.invalidFormatEmail)
+    }
+
+    override fun sendVerificationEmail(state: Boolean) {
+        if (state) {
+            Toast(getString(R.string.failSendVerificationEmail))
+        } else {
+            Toast(getString(R.string.okSendVerificationEmail))
+        }
     }
 
 }

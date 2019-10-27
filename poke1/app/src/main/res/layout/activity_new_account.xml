@@ -29,6 +29,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/name"
+                    android:inputType="textPersonName"
+
 
                     android:maxLines="1"
 
@@ -50,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="apellido"
-
+                    android:inputType="textPersonName"
                     android:maxLines="1"
 
                     android:nextFocusLeft="@+id/txtMail"

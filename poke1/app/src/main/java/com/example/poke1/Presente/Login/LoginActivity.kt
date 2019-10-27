@@ -55,7 +55,8 @@ class LoginActivity : BaseActivity(), LoginView {
         txtPass.addTextChangedListener(onCleanError)
 
         btnSignIn.setOnClickListener {
-            presenter.login(txtMail.text.toString(), txtPass.text.toString())
+            val model = LoginModel(txtMail.text.toString(), txtPass.text.toString())
+            presenter.login(model)
         }
         btnSignGoogle.setOnClickListener {
             //todo
@@ -64,12 +65,12 @@ class LoginActivity : BaseActivity(), LoginView {
             val intent = Intent(this, NewAccountActivity::class.java)
             startActivity(intent)
         }
+        btnForgetPass.setOnClickListener{
+            val intent = Intent(this, ForgetPassActivity::class.java)
+            startActivity(intent)}
 
     }
-    fun ForgetPassListener(view: View){
-        val intent = Intent(this, ForgetPassActivity::class.java)
-        startActivity(intent)
-    }
+
 
     override fun onResume() {
         super.onResume()
@@ -83,11 +84,20 @@ class LoginActivity : BaseActivity(), LoginView {
 
 
 
-    override fun showDelay() {
-        progressBar.visibility = View.VISIBLE
-        btnSignIn.visibility = View.INVISIBLE
-        btnNewAccount.visibility = View.INVISIBLE
-        btnForgetPass.visibility = View.INVISIBLE
+    override fun showDelay(state: Boolean) {
+        if(state) {
+            progressBar.visibility = View.VISIBLE
+            btnSignIn.visibility = View.INVISIBLE
+            btnNewAccount.visibility = View.INVISIBLE
+            btnForgetPass.visibility = View.INVISIBLE
+        }
+        else {
+            progressBar.visibility = View.GONE
+
+            btnSignIn.visibility = View.VISIBLE
+            btnNewAccount.visibility = View.VISIBLE
+            btnForgetPass.visibility = View.VISIBLE
+        }
     }
 
     override fun showCreateAcount() {
@@ -95,13 +105,9 @@ class LoginActivity : BaseActivity(), LoginView {
         startActivity(intent)
     }
 
-    override fun showError() {
-        Toast("ocurrio un error al conectar al servidor")
-        progressBar.visibility = View.GONE
+    override fun showError(msj : String) {
+        Toast("ocurrio un error al conectar al servidor: "+ msj)
 
-        btnSignIn.visibility = View.VISIBLE
-        btnNewAccount.visibility = View.VISIBLE
-        btnForgetPass.visibility = View.VISIBLE
     }
 
     override fun userOk() {
@@ -118,7 +124,7 @@ class LoginActivity : BaseActivity(), LoginView {
         txtLayoutPass.error = getString(R.string.field_empty)
     }
 
-
-
-
+    override fun invalidFormatEmail() {
+        txtLayoutMail.error = getString(R.string.invalidFormatEmail)
+    }
 }
