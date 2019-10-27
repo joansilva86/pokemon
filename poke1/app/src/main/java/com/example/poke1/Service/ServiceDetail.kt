@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.android.volley.Response
 import com.android.volley.toolbox.ImageRequest
 import com.android.volley.toolbox.JsonObjectRequest
-import com.example.poke1.Presente.Detail.PokemonDetail
+import com.example.poke1.Presentation.Detail.PokemonDetail
 
 class ServiceDetail(var context: Context) {
 

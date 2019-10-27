@@ -11,21 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Presente.splash.SplashActivity">
-
-        </activity>
-
-        <activity android:name=".Presente.ForgetPass.ForgetPassActivity" />
-        <activity android:name=".Presente.NewAccount.NewAccountActivity" />
-        <activity android:name=".Presente.Login.LoginActivity">
+        <activity android:name=".Presentation.A_SignInGoogle.SignInGoogleActivity"></activity>
+        <activity android:name=".Presentation.splash.SplashActivity"></activity>
+        <activity android:name=".Presentation.A_ForgetPass.ForgetPassActivity" />
+        <activity android:name=".Presentation.A_NewAccount.NewAccountActivity" />
+        <activity android:name=".Presentation.A_Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Presente.Detail.DetailActivity" />
-        <activity android:name=".Presente.Main.MainActivity" />
+        <activity android:name=".Presentation.Detail.DetailActivity" />
+        <activity android:name=".Presentation.Main.MainActivity" />
     </application>
 
 </manifest>

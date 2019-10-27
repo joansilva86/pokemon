@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    tools:context=".Presente.NewAccount.NewAccountActivity">
+    tools:context=".Presentation.A_NewAccount.NewAccountActivity">
 
     <ScrollView
         android:id="@+id/scrollView"

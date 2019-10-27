@@ -2,8 +2,8 @@ package com.example.poke1.Service
 
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
-import com.example.poke1.Presente.Main.MainView
-import com.example.poke1.Presente.Main.Pokemon
+import com.example.poke1.Presentation.Main.MainView
+import com.example.poke1.Presentation.Main.Pokemon
 
 class PokeService(private var view: MainView) {
 
