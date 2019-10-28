@@ -7,7 +7,7 @@
     android:layout_margin="10dp"
 
     android:orientation="vertical"
-    tools:context=".Presentation.A_Login.LoginActivity">
+    tools:context=".presentation.login.login.LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:padding="30dp">
 
             <ImageView
-                android:id="@+id/masked"
+                android:id="@+id/logoApp"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
@@ -30,13 +30,32 @@
                 android:scaleType="fitCenter"
 
                 app:srcCompat="@drawable/pik" />
-            <Button
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_weight="1"
+                 />
+
+            <com.google.android.gms.common.SignInButton
                 android:id="@+id/btnSignGoogle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="SignIn with Google Account" />
+                android:text="SignIn with Google Account">
+            </com.google.android.gms.common.SignInButton>
 
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btnSignInFace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SignIn with FaceBook">
+
+            </com.facebook.login.widget.LoginButton>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtLayoutMail"
@@ -90,14 +109,6 @@
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnSignIn"

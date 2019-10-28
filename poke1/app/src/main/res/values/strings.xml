@@ -19,5 +19,9 @@
     <string name="invalidFormatEmail">Formato de mail incorrecto</string>
     <string name="failSendVerificationEmail">No se pudo enviar el correo de validacion</string>
     <string name="okSendVerificationEmail">Se envia mail de validacion</string>
+    <string name="sign_in_google_fail">No se pudo registar con Google</string>
+
+    <string name="facebook_app_id">431795897478345</string> <string name="fb_login_protocol_scheme">fb431795897478345</string>
+
 
 </resources>
