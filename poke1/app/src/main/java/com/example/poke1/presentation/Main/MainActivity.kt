@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.poke1.*
-import com.example.poke1.presentation.Base.BaseActivity
+import com.example.poke1.presentation.base.BaseActivity
 import com.example.poke1.presentation.Detail.DetailActivity
 import com.example.poke1.Service.VolleyS
 import kotlinx.android.synthetic.main.activity_main.*

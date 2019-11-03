@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import com.example.poke1.domain.LoginInteractor
-import com.example.poke1.presentation.Base.BaseActivity
+
+import com.example.poke1.presentation.base.BaseActivity
 import com.example.poke1.R
+import com.example.poke1.domain.loginInteractor.LoginInteractor
 
 
 import kotlinx.android.synthetic.main.activity_new_account.*

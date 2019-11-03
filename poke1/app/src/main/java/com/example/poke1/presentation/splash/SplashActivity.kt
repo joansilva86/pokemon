@@ -3,7 +3,7 @@ package com.example.poke1.presentation.splash
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.example.poke1.presentation.Base.BaseActivity
+import com.example.poke1.presentation.base.BaseActivity
 import com.example.poke1.presentation.login.login.LoginActivity
 import com.example.poke1.presentation.Main.MainActivity
 import com.example.poke1.R

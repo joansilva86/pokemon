@@ -10,26 +10,32 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
-class LoginInteractor:LoginInteractorI {
+class LoginInteractor : LoginInteractorI {
 
 
     var auth = FirebaseAuth.getInstance()
     var db = FirebaseDatabase.getInstance()
     var dbReference: DatabaseReference
+
     init {
 
         dbReference = db.reference.child("User")
     }
 
-    override fun signInGoogle(acct: GoogleSignInAccount, callback: LoginInteractorI.SignInGoogleCallBack){
+    override fun signInGoogle(
+        acct: GoogleSignInAccount,
+        callback: LoginInteractorI.SignInGoogleCallBack
+    ) {
 
         //val task = GoogleSignIn.getSignedInAccountFromIntent(data)
         //val account = task.getResult(ApiException::class.java)
 
 
-
-        val credential = GoogleAuthProvider.getCredential(acct .idToken, null)
+        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -64,17 +70,17 @@ class LoginInteractor:LoginInteractorI {
             }
     }
 
-    override fun signIn(model: LoginModel, callback: LoginInteractorI.SignInCallBack) {
-
-        auth.signInWithEmailAndPassword(model.mail, model.pass)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    callback.authenticationOk()
-                } else {
-                    callback.authenticationError(task.exception!!)
+    override suspend fun signIn(model: LoginModel): Unit =
+        suspendCancellableCoroutine { continuation ->
+            auth.signInWithEmailAndPassword(model.mail, model.pass)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Unit)
+                    } else {
+                        continuation.resumeWithException(FirebaseLoginExcepion(task.exception?.message))
+                    }
                 }
-            }
-    }
+        }
 
     override fun createUser(model: NewAccountModel, callback: LoginInteractorI.CreateUserCallBack) {
         auth.createUserWithEmailAndPassword(model.mail, model.pass)

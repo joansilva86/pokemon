@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import com.example.poke1.presentation.Base.BaseActivity
+import com.example.poke1.presentation.base.BaseActivity
 import com.example.poke1.presentation.login.forgetPass.ForgetPassActivity
 import com.example.poke1.presentation.Main.MainActivity
 import com.example.poke1.presentation.login.newAccount.NewAccountActivity
@@ -27,7 +27,7 @@ import com.facebook.login.LoginResult
 import com.facebook.FacebookCallback
 
 
-class LoginActivity : BaseActivity(), LoginView {
+class LoginActivity : BaseActivity(), LoginView{
 
     var presenter = LoginPresenter()
 
@@ -166,6 +166,7 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun onPause() {
         super.onPause()
         presenter.detach()
+        presenter.detachJob()
     }
 
     override fun hideDelay() {
@@ -197,8 +198,9 @@ class LoginActivity : BaseActivity(), LoginView {
 
     override fun userOk() {
         val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
-        finish()
+        //finish()
     }
 
     override fun userEmpty() {

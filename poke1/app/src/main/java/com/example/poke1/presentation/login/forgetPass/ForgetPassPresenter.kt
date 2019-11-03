@@ -4,7 +4,7 @@ import android.app.Activity
 
 import com.example.poke1.domain.loginInteractor.LoginInteractor
 import com.example.poke1.domain.loginInteractor.LoginInteractorI
-import com.example.poke1.presentation.Base.BasePresenter
+import com.example.poke1.presentation.base.BasePresenter
 
 class ForgetPassPresenter (val interactor: LoginInteractor): BasePresenter {
 

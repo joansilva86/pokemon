@@ -1,4 +1,4 @@
-package com.example.poke1.presentation.Base
+package com.example.poke1.presentation.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

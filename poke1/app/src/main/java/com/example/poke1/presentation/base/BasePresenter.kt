@@ -1,4 +1,4 @@
-package com.example.poke1.presentation.Base
+package com.example.poke1.presentation.base
 
 interface BasePresenter {
 

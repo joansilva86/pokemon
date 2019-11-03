@@ -5,13 +5,21 @@ import android.app.Activity
 import android.util.Log
 
 import android.util.Patterns
+import com.example.poke1.domain.loginInteractor.FirebaseLoginExcepion
 import com.example.poke1.domain.loginInteractor.LoginInteractor
 import com.example.poke1.domain.loginInteractor.LoginInteractorI
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 
-class LoginPresenter {
+class LoginPresenter : CoroutineScope {
+
+    private val job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     companion object {
         private const val TAG = "LoginPresenter"
@@ -32,6 +40,9 @@ class LoginPresenter {
         activity = null
     }
 
+    fun detachJob() {
+        coroutineContext.cancel()
+    }
 
     fun login(model: LoginModel) {
         val pattern = Patterns.EMAIL_ADDRESS
@@ -53,23 +64,24 @@ class LoginPresenter {
             }
         }
         view?.showDelay()
-        interactor.signIn(model, object : LoginInteractorI.SignInCallBack {
-            override fun authenticationOk() {
-                view?.userOk()
-                view?.showDelay()
-            }
+        try {
+            launch {
+                interactor.signIn(model)
+                if (view != null) {
+                    view?.userOk()
 
-            override fun authenticationError(ex: Exception) {
-                Log.w(TAG, " fail to signIn", ex)
-                view?.showError(ex.toString())
-                view?.showDelay()
+                }
             }
-        })
+        } catch (ex: FirebaseLoginExcepion) {
+            if (view != null) {
+                view?.showError(ex.toString())
+                view?.hideDelay()
+            }
+        }
+
     }
 
-    var auth = FirebaseAuth.getInstance()
-
-    fun loginWithGoogle(acct: GoogleSignInAccount){
+    fun loginWithGoogle(acct: GoogleSignInAccount) {
 
         interactor.signInGoogle(acct, object : LoginInteractorI.SignInGoogleCallBack {
             override fun signInGoogleOk() {
@@ -82,7 +94,6 @@ class LoginPresenter {
                 view?.hideDelay()
             }
         })
-
 
 
     }

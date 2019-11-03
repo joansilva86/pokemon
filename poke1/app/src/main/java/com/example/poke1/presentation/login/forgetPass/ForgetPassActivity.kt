@@ -4,10 +4,10 @@ package com.example.poke1.presentation.login.forgetPass
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.example.poke1.domain.LoginInteractor
-import com.example.poke1.presentation.Base.BaseActivity
+import com.example.poke1.presentation.base.BaseActivity
 import com.example.poke1.presentation.login.login.LoginActivity
 import com.example.poke1.R
+import com.example.poke1.domain.loginInteractor.LoginInteractor
 import kotlinx.android.synthetic.main.activity_forget_pass.*
 
 

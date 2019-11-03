@@ -1,6 +1,6 @@
 package com.example.poke1.presentation.splash
 
-import com.example.poke1.presentation.Base.BasePresenter
+import com.example.poke1.presentation.base.BasePresenter
 import android.os.Handler
 
 class SplashPresenter: BasePresenter {

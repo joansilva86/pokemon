@@ -6,12 +6,14 @@ import com.example.poke1.presentation.login.newAccount.NewAccountModel
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 interface LoginInteractorI {
+
+
     fun signInGoogle(acct: GoogleSignInAccount, callback: SignInGoogleCallBack)
     fun sendPasswordResetEmail(
         forgetPassModel: ForgetPassModel,
         callback: SendPasswordResetEmailCallBack
     )
-    fun signIn(model: LoginModel, callback: SignInCallBack)
+    suspend fun signIn(model: LoginModel)
     fun createUser(model: NewAccountModel, callback: CreateUserCallBack)
 
     interface CreateUserCallBack {
@@ -25,10 +27,10 @@ interface LoginInteractorI {
 
     }
 
-    interface SignInCallBack {
+    /*interface SignInCallBack {
         fun authenticationOk()
         fun authenticationError(string: Exception)
-    }
+    }*/
 
     interface SignInGoogleCallBack{
         fun signInGoogleOk()
