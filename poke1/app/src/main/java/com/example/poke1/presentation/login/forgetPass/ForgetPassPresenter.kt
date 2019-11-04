@@ -1,12 +1,25 @@
 package com.example.poke1.presentation.login.forgetPass
 
 import android.app.Activity
+import com.example.poke1.domain.loginInteractor.FirebaseForgetPassException
 
 import com.example.poke1.domain.loginInteractor.LoginInteractor
 import com.example.poke1.domain.loginInteractor.LoginInteractorI
 import com.example.poke1.presentation.base.BasePresenter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class ForgetPassPresenter (val interactor: LoginInteractor): BasePresenter {
+
+class ForgetPassPresenter (val interactor: LoginInteractor): BasePresenter , CoroutineScope{
+
+
+    private val job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
 
     companion object {
@@ -22,6 +35,7 @@ class ForgetPassPresenter (val interactor: LoginInteractor): BasePresenter {
         this.activity = null
     }
 
+
     fun attach(view: ForgetPassView, activity: Activity) {
         this.view = view
         this.activity = activity
@@ -30,23 +44,22 @@ class ForgetPassPresenter (val interactor: LoginInteractor): BasePresenter {
     fun forgetPass(model: ForgetPassModel) {
         if (model.mail.isEmpty()) {
             view?.mailEmpty()
-        }
-        if (!model.isValid) {
             return
         }
+        if (!model.isValid) {
+            view?.invalidFormatEmail()
+            return
+        }
+
         view?.showDelay(true)
-        interactor.sendPasswordResetEmail(model, object :
-            LoginInteractorI.SendPasswordResetEmailCallBack {
-            override fun sendFail(msj: String) {
-                view?.showError(msj)
-            }
-
-            override fun sendOk() {
+        launch{
+            try {
+                interactor.sendPasswordResetEmail(model)
                 view?.recoverPassOk()
+            }catch (ex: FirebaseForgetPassException){
+                view?.showError(ex.message.toString())
             }
-        })
-
-
+        }
         view?.showDelay(false)
     }
 }

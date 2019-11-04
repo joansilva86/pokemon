@@ -3,18 +3,26 @@ package com.example.poke1.presentation.login.newAccount
 import android.app.Activity
 import android.util.Log
 import android.util.Patterns
+import com.example.poke1.domain.loginInteractor.FirebaseCreateUserException
 import com.example.poke1.domain.loginInteractor.LoginInteractor
 import com.example.poke1.domain.loginInteractor.LoginInteractorI
 import com.example.poke1.presentation.base.BasePresenter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class NewAccountPresenter (val interactor: LoginInteractor): BasePresenter {
+class NewAccountPresenter(val interactor: LoginInteractor) : BasePresenter , CoroutineScope{
+
+    private val job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     var view: NewAccountView? = null
     var activity: Activity? = null
 
-    companion object {
-        private const val TAG = "NewAccount"
-    }
 
     override fun detach() {
         view = null
@@ -58,27 +66,24 @@ class NewAccountPresenter (val interactor: LoginInteractor): BasePresenter {
         if (!model.isValid) {
             return
         }
+
         /*********************/
         //Erick te podras fijar esto
         /*********************/
         view?.showDelay()
-        interactor.createUser(model,object : LoginInteractorI.CreateUserCallBack{
-            override fun createUserOk() {
+
+        launch {
+            try {
+                interactor.createUser(model)
                 view?.showUserOk()
                 view?.hideDelay()
-            }
-
-            override fun createUserFail(ex: Exception) {
-                Log.w(TAG, " fail to signIn", ex)
+            } catch (ex: FirebaseCreateUserException) {
                 view?.showUserFail(ex.toString())
                 view?.hideDelay()
             }
-        })
-
-
+        }
 
     }
-
 
 
 }

@@ -5,11 +5,12 @@ import android.app.Activity
 import android.util.Log
 
 import android.util.Patterns
-import com.example.poke1.domain.loginInteractor.FirebaseLoginExcepion
+import com.example.poke1.domain.loginInteractor.FirebaseLoginException
+import com.example.poke1.domain.loginInteractor.GoogleSignInException
 import com.example.poke1.domain.loginInteractor.LoginInteractor
 import com.example.poke1.domain.loginInteractor.LoginInteractorI
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.firebase.auth.FirebaseAuth
+
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -20,10 +21,6 @@ class LoginPresenter : CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
-
-    companion object {
-        private const val TAG = "LoginPresenter"
-    }
 
 
     val interactor = LoginInteractor()
@@ -64,36 +61,36 @@ class LoginPresenter : CoroutineScope {
             }
         }
         view?.showDelay()
-        try {
-            launch {
+        launch {
+            try {
                 interactor.signIn(model)
                 if (view != null) {
                     view?.userOk()
 
                 }
-            }
-        } catch (ex: FirebaseLoginExcepion) {
-            if (view != null) {
+            } catch (ex: FirebaseLoginException) {
+                /*OSo vos sabes que pudo pasar aca
+                * cuando viene por el error y pregunta por la vista esta
+                * parece que esta en null pero sin embargo la vista es visible*/
+                //if (view != null) {
                 view?.showError(ex.toString())
                 view?.hideDelay()
+                //}
             }
         }
-
     }
 
     fun loginWithGoogle(acct: GoogleSignInAccount) {
-
-        interactor.signInGoogle(acct, object : LoginInteractorI.SignInGoogleCallBack {
-            override fun signInGoogleOk() {
+        launch {
+            try {
+                interactor.signInGoogle(acct)
+                view?.hideDelay()
                 view?.userOk()
-                view?.hideDelay()
-            }
 
-            override fun signInGoogleFail() {
-                Log.w(TAG, " fail to signIn")
-                view?.hideDelay()
+            } catch (ex: GoogleSignInException) {
+                view?.showError(ex.toString())
             }
-        })
+        }
 
 
     }

@@ -30,6 +30,10 @@ class ForgetPassActivity : BaseActivity(),
         }
     }
 
+    override fun invalidFormatEmail() {
+        txtLayoutMail.error = getString(R.string.invalidFormatEmail)
+    }
+
     override fun onResume() {
         super.onResume()
         presenter.attach(this,this)
