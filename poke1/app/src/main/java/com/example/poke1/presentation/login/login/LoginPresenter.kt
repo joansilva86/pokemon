@@ -25,16 +25,16 @@ class LoginPresenter : CoroutineScope {
 
     val interactor = LoginInteractor()
     var view: LoginView? = null
-    var activity: Activity? = null
+    //var activity: Activity? = null
 
-    fun attach(view: LoginView, activity: Activity) {
+    fun attach(view: LoginView) {
         this.view = view
-        this.activity = activity
+      //  this.activity = activity
     }
 
     fun detach() {
         this.view = null
-        activity = null
+        //activity = null
     }
 
     fun detachJob() {

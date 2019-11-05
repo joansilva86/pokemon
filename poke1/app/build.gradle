@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+/*
+    testOption{
+ERICK vi que esto puede servir para generar un reporte.
+    }*/
 }
 
 apply plugin: 'com.google.gms.google-services'
@@ -47,6 +51,7 @@ dependencies {
 
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2'
+    implementation 'org.mockito:mockito-all:1.10.19'
 
 
 }

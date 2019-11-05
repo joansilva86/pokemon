@@ -160,7 +160,7 @@ class LoginActivity : BaseActivity(), LoginView{
 
     override fun onResume() {
         super.onResume()
-        presenter.attach(this, this)
+        presenter.attach(this)
     }
 
     override fun onPause() {
