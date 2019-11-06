@@ -29,13 +29,52 @@ class ExampleInstrumentedTest {
     }*/
 
     @Test
-    fun login() {
+    fun loginSucceed() {
         val view = Mockito.mock(LoginView::class.java)
-        //Creo que necesito la vista que es la que deboi analista
         var model = LoginModel("joan.silva.1986@gmail.com","asd123")
         var presenter = LoginPresenter()
         presenter.attach(view)
         presenter.login(model)
         Mockito.verify(view).userOk()
     }
+    @Test
+    fun loginInvalidUser(){
+        val view = Mockito.mock(LoginView::class.java)
+        var model = LoginModel("invalidMail@gmail.com","asd123")
+        var presenter = LoginPresenter()
+        presenter.attach(view)
+        presenter.login(model)
+        Mockito.verify(view).showError("")
+    }
+
+    @Test
+    fun loginIncorrectMail(){
+        val view = Mockito.mock(LoginView::class.java)
+        var model = LoginModel("No_Mail","asd123")
+        var presenter = LoginPresenter()
+        presenter.attach(view)
+        presenter.login(model)
+        Mockito.verify(view).invalidFormatEmail()
+    }
+
+    @Test
+    fun loginEmptyPass(){
+        val view = Mockito.mock(LoginView::class.java)
+        var model = LoginModel("No_Mail","")
+        var presenter = LoginPresenter()
+        presenter.attach(view)
+        presenter.login(model)
+        Mockito.verify(view).passEmpty()
+    }
+
+    @Test
+    fun loginEmptyUser(){
+        val view = Mockito.mock(LoginView::class.java)
+        var model = LoginModel("No_Mail","asd123")
+        var presenter = LoginPresenter()
+        presenter.attach(view)
+        presenter.login(model)
+        Mockito.verify(view).passEmpty()
+    }
+
 }

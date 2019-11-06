@@ -15,7 +15,7 @@ class ForgetPassActivity : BaseActivity(),
     ForgetPassView {
 
     private val presenter =
-        ForgetPassPresenter(LoginInteractor())
+        ForgetPassPresenter()
 
     override fun getLayout(): Int {
         return R.layout.activity_forget_pass
@@ -36,7 +36,7 @@ class ForgetPassActivity : BaseActivity(),
 
     override fun onResume() {
         super.onResume()
-        presenter.attach(this,this)
+        presenter.attach(this)
     }
 
     override fun onPause() {

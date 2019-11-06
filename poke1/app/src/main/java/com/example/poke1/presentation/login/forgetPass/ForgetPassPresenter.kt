@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 
-class ForgetPassPresenter (val interactor: LoginInteractor): BasePresenter , CoroutineScope{
+class ForgetPassPresenter : BasePresenter, CoroutineScope {
 
-
+    val interactor = LoginInteractor()
     private val job = Job()
 
     override val coroutineContext: CoroutineContext
@@ -28,17 +28,15 @@ class ForgetPassPresenter (val interactor: LoginInteractor): BasePresenter , Cor
 
 
     var view: ForgetPassView? = null
-    var activity: Activity? = null
+
 
     override fun detach() {
         this.view = null
-        this.activity = null
     }
 
 
-    fun attach(view: ForgetPassView, activity: Activity) {
+    fun attach(view: ForgetPassView) {
         this.view = view
-        this.activity = activity
     }
 
     fun forgetPass(model: ForgetPassModel) {
@@ -52,11 +50,11 @@ class ForgetPassPresenter (val interactor: LoginInteractor): BasePresenter , Cor
         }
 
         view?.showDelay(true)
-        launch{
+        launch {
             try {
                 interactor.sendPasswordResetEmail(model)
                 view?.recoverPassOk()
-            }catch (ex: FirebaseForgetPassException){
+            } catch (ex: FirebaseForgetPassException) {
                 view?.showError(ex.message.toString())
             }
         }
