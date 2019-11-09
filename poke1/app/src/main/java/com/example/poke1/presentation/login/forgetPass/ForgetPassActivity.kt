@@ -4,18 +4,20 @@ package com.example.poke1.presentation.login.forgetPass
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.example.poke1.PokeApp
 import com.example.poke1.presentation.base.BaseActivity
 import com.example.poke1.presentation.login.login.LoginActivity
 import com.example.poke1.R
 import com.example.poke1.domain.loginInteractor.LoginInteractor
 import kotlinx.android.synthetic.main.activity_forget_pass.*
+import javax.inject.Inject
 
 
 class ForgetPassActivity : BaseActivity(),
     ForgetPassView {
 
-    private val presenter =
-        ForgetPassPresenter()
+    @Inject
+    lateinit var presenter : ForgetPassPresenter
 
     override fun getLayout(): Int {
         return R.layout.activity_forget_pass
@@ -23,6 +25,7 @@ class ForgetPassActivity : BaseActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as PokeApp).getAppComponent().injection(this)
         btnForget.setOnClickListener {
             val model =
                 ForgetPassModel(txtMail.toString())
@@ -66,5 +69,4 @@ class ForgetPassActivity : BaseActivity(),
             progressBar.visibility = View.GONE
         }
     }
-
 }

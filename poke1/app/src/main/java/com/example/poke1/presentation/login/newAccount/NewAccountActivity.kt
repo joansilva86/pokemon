@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import com.example.poke1.PokeApp
 
 import com.example.poke1.presentation.base.BaseActivity
 import com.example.poke1.R
@@ -22,9 +23,7 @@ import kotlinx.android.synthetic.main.activity_new_account.txtPass
 class NewAccountActivity : BaseActivity(),
     NewAccountView {
 
-    private val presenter =
-        NewAccountPresenter(LoginInteractor())
-
+    lateinit var presenter: NewAccountPresenter
 
     override fun getLayout(): Int {
         return R.layout.activity_new_account
@@ -44,6 +43,7 @@ class NewAccountActivity : BaseActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as PokeApp).getAppComponent().injection(this)
         txtName.addTextChangedListener(onCleanError)
         txtLastName.addTextChangedListener(onCleanError)
         txtMail.addTextChangedListener(onCleanError)

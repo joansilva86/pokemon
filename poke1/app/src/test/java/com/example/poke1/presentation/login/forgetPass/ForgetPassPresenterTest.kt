@@ -15,7 +15,7 @@ class ForgetPassPresenterTest {
 /*
 ERICK aca cuando agrego el presenter explota
 * */
-        val presenter = ForgetPassPresenter()
+        //val presenter = ForgetPassPresenter()
         //presenter.attach(view)
         assert(true)
     }

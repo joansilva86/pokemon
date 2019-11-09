@@ -12,10 +12,11 @@ import com.example.poke1.domain.loginInteractor.LoginInteractorI
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 import kotlinx.coroutines.*
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
-class LoginPresenter : CoroutineScope {
+class LoginPresenter @Inject constructor(private val interactor : LoginInteractorI) : CoroutineScope {
 
     private val job = Job()
 
@@ -23,7 +24,7 @@ class LoginPresenter : CoroutineScope {
         get() = Dispatchers.Main + job
 
 
-    val interactor = LoginInteractor()
+
     var view: LoginView? = null
     //var activity: Activity? = null
 

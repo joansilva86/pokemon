@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import com.example.poke1.PokeApp
 import com.example.poke1.presentation.base.BaseActivity
 import com.example.poke1.presentation.login.forgetPass.ForgetPassActivity
 import com.example.poke1.presentation.Main.MainActivity
 import com.example.poke1.presentation.login.newAccount.NewAccountActivity
 
 import com.example.poke1.R
+import com.example.poke1.domain.loginInteractor.LoginInteractor
 import com.facebook.CallbackManager
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -25,11 +27,13 @@ import com.google.android.gms.common.api.ApiException
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.facebook.FacebookCallback
+import javax.inject.Inject
 
 
-class LoginActivity : BaseActivity(), LoginView{
+class LoginActivity : BaseActivity(), LoginView {
+    @Inject
+    lateinit var presenter: LoginPresenter
 
-    var presenter = LoginPresenter()
 
     private val onCleanError = object : TextWatcher {
 
@@ -100,6 +104,8 @@ class LoginActivity : BaseActivity(), LoginView{
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
+        (application as PokeApp).getAppComponent().injection(this)
         txtMail.addTextChangedListener(onCleanError)
         txtPass.addTextChangedListener(onCleanError)
 
@@ -115,7 +121,8 @@ class LoginActivity : BaseActivity(), LoginView{
         btnSignGoogle.setOnClickListener {
             showDelay()
             val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent,
+            startActivityForResult(
+                signInIntent,
                 RC_SIGN_IN
             )
         }

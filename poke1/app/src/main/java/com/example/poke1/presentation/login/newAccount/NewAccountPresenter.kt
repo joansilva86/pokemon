@@ -11,9 +11,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class NewAccountPresenter(val interactor: LoginInteractor) : BasePresenter , CoroutineScope{
+class NewAccountPresenter @Inject constructor(private val interactor: LoginInteractorI ) : BasePresenter , CoroutineScope{
 
     private val job = Job()
 

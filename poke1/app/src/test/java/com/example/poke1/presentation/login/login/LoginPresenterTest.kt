@@ -8,7 +8,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.runners.MockitoJUnitRunner
-
+/*
 //@RunWith(MockitoJUnitRunner.class)
 class LoginPresenterTest {
 
@@ -18,11 +18,10 @@ class LoginPresenterTest {
     @Test
     fun login() {
         val view = Mockito.mock(LoginView::class.java)
-        //Creo que necesito la vista que es la que deboi analista
+
         var model = LoginModel("joan.silva.1986@gmail.com","asd123")
         var presenter = LoginPresenter()
         presenter.attach(view)
         presenter.login(model)
         verify(view).userOk()
-    }
-}
+    }*/

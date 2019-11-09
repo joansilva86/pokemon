@@ -10,12 +10,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
-class ForgetPassPresenter : BasePresenter, CoroutineScope {
+class ForgetPassPresenter @Inject constructor(private val interactor : LoginInteractorI) : BasePresenter, CoroutineScope {
 
-    val interactor = LoginInteractor()
+
     private val job = Job()
 
     override val coroutineContext: CoroutineContext

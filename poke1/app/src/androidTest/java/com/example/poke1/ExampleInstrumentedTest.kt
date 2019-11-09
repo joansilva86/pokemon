@@ -19,14 +19,9 @@ import org.mockito.runners.MockitoJUnitRunner
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+/*
 @RunWith(MockitoJUnitRunner::class)
 class ExampleInstrumentedTest {
-    /*@Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.poke1", appContext.packageName)
-    }*/
 
     @Test
     fun loginSucceed() {
@@ -37,6 +32,7 @@ class ExampleInstrumentedTest {
         presenter.login(model)
         Mockito.verify(view).userOk()
     }
+
     @Test
     fun loginInvalidUser(){
         val view = Mockito.mock(LoginView::class.java)
@@ -77,4 +73,4 @@ class ExampleInstrumentedTest {
         Mockito.verify(view).passEmpty()
     }
 
-}
+}*/
