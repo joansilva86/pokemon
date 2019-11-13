@@ -23,8 +23,6 @@ class LoginPresenter @Inject constructor(private val interactor : LoginInteracto
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-
-
     var view: LoginView? = null
     //var activity: Activity? = null
 

@@ -6,10 +6,12 @@ import com.example.poke1.presentation.login.login.LoginActivity
 import com.example.poke1.presentation.login.newAccount.NewAccountActivity
 
 import dagger.Component
-
+import javax.inject.Singleton
 
 
 @Component(modules=[PresentationModule::class])
+
+@Singleton
 interface PresentationComponent {
     fun injection(loginActivity: LoginActivity)
     fun injection(forgetPassActivity: ForgetPassActivity)

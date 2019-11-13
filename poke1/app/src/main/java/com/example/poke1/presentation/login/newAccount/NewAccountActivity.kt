@@ -19,10 +19,12 @@ import kotlinx.android.synthetic.main.activity_new_account.txtLayoutMail
 import kotlinx.android.synthetic.main.activity_new_account.txtLayoutPass
 import kotlinx.android.synthetic.main.activity_new_account.txtMail
 import kotlinx.android.synthetic.main.activity_new_account.txtPass
+import javax.inject.Inject
 
 class NewAccountActivity : BaseActivity(),
     NewAccountView {
 
+    @Inject
     lateinit var presenter: NewAccountPresenter
 
     override fun getLayout(): Int {
